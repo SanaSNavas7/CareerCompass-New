@@ -1,9 +1,44 @@
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><title>About</title></head>
-<body>
-<h2>About SkillSpy+</h2>
-<p>SkillSpy+ is a real-time skill gap analyzer that compares your resume with job role expectations using Python and spaCy NLP.</p>
-</body>
-</html>
+{% block title %}About Us - Career Compass{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-lg shadow-xl">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">About Career Compass</h2>
+    <div class="prose max-w-none text-gray-700 leading-relaxed">
+        <p class="mb-4">
+            Career Compass is designed to be your personal guide in navigating the complex world of career development.
+            Our mission is to empower job seekers and professionals by providing insightful analysis and actionable recommendations
+            to help them achieve their career goals.
+        </p>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-3">What We Offer:</h3>
+        <ul class="list-disc list-inside mb-4 space-y-2">
+            <li><strong>Skill Analysis:</strong> Upload your resume and get a breakdown of your existing skills. Our system uses Natural Language Processing (NLP) to compare these against the requirements of various job roles.</li>
+            <li><strong>AI-Powered Personalized Recommendations:</strong> Based on your skills and chosen target roles, our AI generates highly personalized suggestions for career paths and areas for skill improvement.</li>
+            <li><strong>AI Chatbot:</strong> Our intelligent AI chatbot is available to answer a wide range of career-related questions and provide dynamic advice.</li>
+            <li><strong>Learning Resources:</strong> We point you to valuable online resources to help you acquire new skills and enhance your professional profile.</li>
+        </ul>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Our Approach (Hybrid AI & NLP):</h3>
+        <p class="mb-4">
+            In this version of Career Compass, we combine the power of advanced AI models with efficient local NLP processing:
+        </p>
+        <ul class="list-disc list-inside mb-4 space-y-2">
+            <li><strong>Skill Extraction (using spaCy):</strong> We utilize the spaCy library to process your resume text, identify key terms, and match them against a comprehensive list of known skills. This provides a robust and localized skill identification.</li>
+            <li><strong>AI-Powered Recommendations (using Gemini API):</strong> For personalized career path and skill improvement suggestions, we leverage the Google Gemini API. This allows for highly dynamic and contextually rich advice generation.</li>
+            <li><strong>AI Chatbot (using Gemini API):</strong> Our chatbot also utilizes the Google Gemini API to provide real-time, intelligent, and conversational responses to your career queries.</li>
+            <li><strong>Static Job Skill Sets:</strong> We maintain a predefined database of key skills required for various common job roles to ensure consistent matching.</li>
+        </ul>
+        <p class="mb-4">
+            This hybrid approach ensures both intelligent, dynamic interactions where needed, and efficient, reliable processing for core resume analysis.
+        </p>
+        <p class="text-center text-lg font-medium text-blue-700 mt-8">
+            Start your journey with Career Compass today!
+        </p>
+    </div>
+    <div class="flex justify-center mt-8">
+        <a href="{{ url_for('dashboard') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transform hover:scale-105 transition duration-300 ease-in-out">
+            Go to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}
