@@ -1,0 +1,14 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Results</title></head>
+<body>
+<h2>Analysis Result for {{ job_role }}</h2>
+<p>Resume Match Score: {{ score }}%</p>
+<h3>Matched Skills:</h3>
+<ul>{% for skill in matched %}<li>{{ skill }}</li>{% endfor %}</ul>
+<h3>Missing Skills:</h3>
+<ul>{% for skill in missing %}<li>{{ skill }}</li>{% endfor %}</ul>
+<a href="/">Try Again</a>
+</body>
+</html>

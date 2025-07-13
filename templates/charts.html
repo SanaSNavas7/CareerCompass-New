@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}Skill Analysis - Career Compass{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-lg shadow-xl">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Skill Match Analysis</h2>
+    
+    {% if chart_data.labels %}
+        <div class="text-center mb-8">
+            <p class="text-lg text-gray-700 mb-2">Analysis for Target Job Role: <span class="font-semibold text-blue-600">{{ selected_job_role }}</span></p>
+            <p class="text-xl text-gray-800 font-bold">Resume Score: <span class="text-green-600">{{ resume_score }}%</span></p>
+            <p class="text-sm text-gray-500 mt-2">Score indicates the percentage of target skills found in your resume.</p>
+        </div>
+
+        <div class="mb-10">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Skill Comparison Chart</h3>
+            <div class="relative h-96 w-full mx-auto">
+                <canvas id="skillChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+            <div>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Skills Extracted from Your Resume:</h3>
+                {% if extracted_skills %}
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        {% for skill in extracted_skills %}
+                            <li>{{ skill }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-gray-500 italic">No skills extracted. Please ensure your resume contains clear skill mentions.</p>
+                {% endif %}
+            </div>
+            <div>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Target Skills for {{ selected_job_role }}:</h3>
+                {% if target_job_skills %}
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        {% for skill in target_job_skills %}
+                            <li class="{% if skill.lower() in extracted_skills|map('lower')|list %}text-green-600 font-medium{% else %}text-red-600 font-medium{% endif %}">
+                                {{ skill }}
+                                {% if skill.lower() not in extracted_skills|map('lower')|list %} (Missing){% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-gray-500 italic">Could not retrieve target skills for this role.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-4 mt-8">
+            <a href="{{ url_for('upload') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105">
+                Upload New Resume
+            </a>
+            <a href="{{ url_for('career_recommendation') }}" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105">
+                Get Career Recommendations
+            </a>
+            <a href="{{ url_for('dashboard') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105">
+                Back to Dashboard
+            </a>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Parse the JSON strings passed from Flask
+                const chartLabels = JSON.parse('{{ chart_labels_json | safe }}');
+                const chartValues = JSON.parse('{{ chart_values_json | safe }}');
+                const backgroundColors = JSON.parse('{{ background_colors_json | safe }}');
+
+                const ctx = document.getElementById('skillChart').getContext('2d');
+                
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: chartLabels,
+                        datasets: [{
+                            label: 'Skill Match (1=Matched, 0=Missing)',
+                            data: chartValues,
+                            backgroundColor: backgroundColors,
+                            borderColor: backgroundColors.map(color => color.replace('100', '500').replace('200', '600')), // Darker border
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 1,
+                                ticks: {
+                                    stepSize: 1,
+                                    callback: function(value, index, values) {
+                                        if (value === 1) return 'Matched';
+                                        if (value === 0) return 'Missing';
+                                        return '';
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false // Hide legend as colors are self-explanatory
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y === 1) {
+                                            label += 'Matched';
+                                        } else {
+                                            label += 'Missing';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    {% else %}
+        <div class="text-center py-10">
+            <p class="text-xl text-gray-600 mb-4">No skill analysis data available.</p>
+            <p class="text-md text-gray-500 mb-6">Please upload your resume and select a target job role to see your skill analysis.</p>
+            <a href="{{ url_for('upload') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transform hover:scale-105 transition duration-300 ease-in-out">
+                Upload Resume Now
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Career Compass{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-lg shadow-xl text-center">
+    <h2 class="text-4xl font-bold text-gray-800 mb-6">Welcome, {{ session.user }}!</h2>
+    <p class="text-xl text-gray-700 mb-10">Your personalized career journey starts here.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-blue-50 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+            <h3 class="text-2xl font-semibold text-blue-800 mb-3">Upload Resume</h3>
+            <p class="text-gray-700 mb-4">Analyze your skills and get a compatibility score for target roles.</p>
+            <a href="{{ url_for('upload') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg inline-block">Go to Upload</a>
+        </div>
+        <div class="bg-purple-50 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+            <h3 class="text-2xl font-semibold text-purple-800 mb-3">Career Chatbot</h3>
+            <p class="text-gray-700 mb-4">Get instant answers and advice on career-related questions.</p>
+            <a href="{{ url_for('chatbot') }}" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg inline-block">Chat Now</a>
+        </div>
+        <div class="bg-green-50 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+            <h3 class="text-2xl font-semibold text-green-800 mb-3">Career Recommendations</h3>
+            <p class="text-gray-700 mb-4">Discover personalized career paths and skill improvement suggestions.</p>
+            <a href="{{ url_for('career_recommendation') }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg inline-block">Get Recommendations</a>
+        </div>
+        <div class="bg-yellow-50 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+            <h3 class="2xl font-semibold text-yellow-800 mb-3">Learning Resources</h3>
+            <p class="text-gray-700 mb-4">Find valuable resources to enhance your skills and knowledge.</p>
+            <a href="{{ url_for('resources') }}" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg inline-block">Explore Resources</a>
+        </div>
+        <div class="bg-red-50 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+            <h3 class="text-2xl font-semibold text-red-800 mb-3">About Career Compass</h3>
+            <p class="text-gray-700 mb-4">Learn more about this tool and its mission.</p>
+            <a href="{{ url_for('about') }}" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg inline-block">Learn More</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Resume - Career Compass{% endblock %}
+
+{% block content %}
+<div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-xl">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Upload Your Resume</h2>
+    <p class="text-gray-700 text-center mb-6">
+        Upload your resume (TXT, PDF, or DOCX) and select a target job role to get a personalized skill analysis.
+    </p>
+    <form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+        <div class="mb-6">
+            <label for="resume" class="block text-gray-700 text-sm font-semibold mb-2">Select Resume File:</label>
+            <input type="file" id="resume" name="resume" accept=".txt,.pdf,.docx" required
+                   class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 p-2.5">
+            <p class="mt-1 text-sm text-gray-500">Allowed file types: TXT, PDF, DOCX</p>
+        </div>
+        <div class="mb-8">
+            <label for="target_job_role" class="block text-gray-700 text-sm font-semibold mb-2">Target Job Role:</label>
+            <select id="target_job_role" name="target_job_role" required
+                    class="shadow-sm border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 bg-white">
+                <option value="">-- Select a Job Role --</option>
+                <option value="Software Engineer">Software Engineer</option>
+                <option value="Data Scientist">Data Scientist</option>
+                <option value="Project Manager">Project Manager</option>
+                <option value="Marketing Specialist">Marketing Specialist</option>
+                <option value="Financial Analyst">Financial Analyst</option>
+                <option value="UX/UI Designer">UX/UI Designer</option>
+                <option value="Human Resources Manager">Human Resources Manager</option>
+                <option value="Sales Representative">Sales Representative</option>
+                <option value="Customer Service Representative">Customer Service Representative</option>
+                <option value="Healthcare Professional">Healthcare Professional</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Graphic Designer">Graphic Designer</option>
+                <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+                <option value="Operations Manager">Operations Manager</option>
+                <option value="Business Analyst">Business Analyst</option>
+            </select>
+        </div>
+        <button type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transform hover:scale-105 transition duration-300 ease-in-out">
+            Analyze Resume
+        </button>
+    </form>
+</div>
+{% endblock %}

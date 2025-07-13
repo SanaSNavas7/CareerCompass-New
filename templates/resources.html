@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Learning Resources - Career Compass{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-lg shadow-xl">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Valuable Learning Resources</h2>
+    <p class="text-lg text-gray-700 text-center mb-8">
+        Enhance your skills and knowledge with these recommended platforms and resources.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Online Course Platforms -->
+        <div class="bg-blue-50 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+            <h3 class="text-2xl font-semibold text-blue-800 mb-3">Online Courses</h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li><a href="https://www.coursera.org/" target="_blank" class="text-blue-600 hover:underline">Coursera</a> - University courses, specializations.</li>
+                <li><a href="https://www.udemy.com/" target="_blank" class="text-blue-600 hover:underline">Udemy</a> - Practical skills, project-based learning.</li>
+                <li><a href="https://www.edx.org/" target="_blank" class="text-blue-600 hover:underline">edX</a> - University-level courses from top institutions.</li>
+                <li><a href="https://www.linkedin.com/learning/" target="_blank" class="text-blue-600 hover:underline">LinkedIn Learning</a> - Business, tech, and creative skills.</li>
+            </ul>
+        </div>
+
+        <!-- Coding Practice & Development -->
+        <div class="bg-purple-50 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+            <h3 class="text-2xl font-semibold text-purple-800 mb-3">Coding & Tech Skills</h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li><a href="https://leetcode.com/" target="_blank" class="text-purple-600 hover:underline">LeetCode</a> - Algorithm and data structure practice.</li>
+                <li><a href="https://www.hackerrank.com/" target="_blank" class="text-purple-600 hover:underline">HackerRank</a> - Coding challenges and interview prep.</li>
+                <li><a href="https://freecodecamp.org/" target="_blank" class="text-purple-600 hover:underline">freeCodeCamp</a> - Web development and programming certifications.</li>
+                <li><a href="https://github.com/" target="_blank" class="text-purple-600 hover:underline">GitHub</a> - Explore open-source projects, build your portfolio.</li>
+            </ul>
+        </div>
+
+        <!-- Professional Development & Soft Skills -->
+        <div class="bg-green-50 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+            <h3 class="text-2xl font-semibold text-green-800 mb-3">Professional & Soft Skills</h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li><a href="https://www.toastmasters.org/" target="_blank" class="text-green-600 hover:underline">Toastmasters International</a> - Public speaking and leadership.</li>
+                <li><a href="https://www.projectmanagement.com/" target="_blank" class="text-green-600 hover:underline">ProjectManagement.com</a> - Resources for project managers.</li>
+                <li><a href="https://hbr.org/" target="_blank" class="text-green-600 hover:underline">Harvard Business Review</a> - Business insights and leadership.</li>
+                <li><a href="https://www.mindtools.com/" target="_blank" class="text-green-600 hover:underline">Mind Tools</a> - Career skills, leadership, and management.</li>
+            </ul>
+        </div>
+
+        <!-- Data Science & Analytics -->
+        <div class="bg-yellow-50 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+            <h3 class="text-2xl font-semibold text-yellow-800 mb-3">Data Science & Analytics</h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li><a href="https://www.kaggle.com/" target="_blank" class="text-yellow-600 hover:underline">Kaggle</a> - Data science competitions, datasets, and notebooks.</li>
+                <li><a href="https://towardsdatascience.com/" target="_blank" class="text-yellow-600 hover:underline">Towards Data Science</a> - Articles and tutorials on data science.</li>
+                <li><a href="https://datacamp.com/" target="_blank" class="text-yellow-600 hover:underline">DataCamp</a> - Interactive data science courses.</li>
+                <li><a href="https://www.r-project.org/" target="_blank" class="text-yellow-600 hover:underline">R Project</a> - Statistical computing environment.</li>
+            </ul>
+        </div>
+
+        <!-- General Career Development -->
+        <div class="bg-red-50 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+            <h3 class="text-2xl font-semibold text-red-800 mb-3">General Career Development</h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li><a href="https://www.linkedin.com/" target="_blank" class="text-red-600 hover:underline">LinkedIn</a> - Networking, job search, professional branding.</li>
+                <li><a href="https://www.indeed.com/" target="_blank" class="text-red-600 hover:underline">Indeed Career Guide</a> - Articles on resumes, interviews, job search.</li>
+                <li><a href="https://www.glassdoor.com/" target="_blank" class="text-red-600 hover:underline">Glassdoor</a> - Company reviews, salary data, interview questions.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="flex justify-center mt-8">
+        <a href="{{ url_for('dashboard') }}" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transform hover:scale-105 transition duration-300 ease-in-out">
+            Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}
